@@ -21,7 +21,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install -r elastic-logger/requirements.txt
+          pip install -r elastic-logger/requirements.*.txt
           python -m pip install build
           pip install wheel
 
