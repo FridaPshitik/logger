@@ -1,0 +1,41 @@
+name: Build Wheel Package
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "elastic-logger/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install Dependencies
+        run: |
+          pip install -r elastic-logger/requirements.*.txt
+          python -m pip install build
+          pip install wheel
+
+      - name: Test with pytest
+        run: |
+          pytest elastic-logger
+
+      - name: Build Wheel Package
+        run: |
+          cd elastic-logger
+          python -m build
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: wheel-package
+          path: elastic-logger/dist/
