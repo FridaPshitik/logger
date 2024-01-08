@@ -6,6 +6,8 @@ from unittest.mock import MagicMock, ANY
 def test_elastic_logger():
     elastic_logger = ElasticLogger("my_service")
     assert elastic_logger.service_name == "my_service"
+    print("1111111111")
+
 
 def test_create_log(elastic_logger: ElasticLogger):
     new_log = elastic_logger._create_log("my-log", "INFO")
